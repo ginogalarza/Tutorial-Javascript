@@ -27,11 +27,10 @@
 <body>
     
     <div id="calendario"></div>
-
+    <div id="reloj"></div>
     <script>
-        // createCalendar('calendar', 2021, 8);
           let date = new Date();
-          document.body.innerHTML = `<div>Fecha 1 (Sin parametros): ${date}</div>`;
+          document.body.innerHTML += `<div>Fecha 1 (Sin parametros): ${date}</div>`;
 
           let date1 = new Date(1000 * 60 * 24); // 1 seg = 1000 milisegundos
           document.body.innerHTML += `<div>Fecha 2 (Milisegundos): ${date1}</div>`;
@@ -39,22 +38,24 @@
           let date2 = new Date('2021-05-24');
           document.body.innerHTML += `<div>Fecha 2 (Fecha String): ${date2}</div>`;
           
-          //Las fechas se autocorrigen
+          // Las fechas se autocorrigen
           let date3 = new Date(2022, 6, 5);
           document.body.innerHTML += `<div>Fecha 2 (Fecha Parametros): ${date3}</div>`;
           date3.setDate(date3.getDate() + 3);
 
+          //Metodos de Fechas
           console.log('Año: '+date.getFullYear());
           console.log('Mes: '+date.getMonth());
           console.log('Dia: '+date.getDate());
           console.log('Horas: '+date.getHours());
           console.log('Minutos: '+date.getMinutes());
-          console.log('Minutos: '+date.getSeconds());
+          console.log('Segundos: '+date.getSeconds());
           console.log('N° Dia (0 - 6): '+date.getDay());
           console.log('Tinestamp: '+date.getTime());
           console.log('Fecha Sumada (+3 dias): '+date3);
           console.log('Fecha Convertida Timestamp: '+(+date));
 
+          // Rendimiento en la ejecucio de Fechas 
           let start = new Date();
 
           for (let i = 0; i < 100000; i++) {
@@ -65,18 +66,25 @@
 
           console.log(`Tiempo transcurrido es de ${end - start} ms`);
 
+          // Resta de Fechas
           let primeraFecha = new Date(2022, 08, 25);
           let segundaFecha = new Date(2022, 08, 23);
 
           let resta = new Date(primeraFecha - segundaFecha);
 
-          console.log(resta.getDate());
+          console.log('Fecha restada: '+resta.getDate());
 
+          /*
+          * Tareas Realizadas
+          */
+         
           // Tarea 1
+          console.warn('Generar una Fecha');
           let tarea1 = new Date(2012, 01, 20, 3, 12);
           console.log('Tarea 1: '+tarea1);
 
           // Tarea 2
+          console.warn('Dias en Español');
           let dias = ['DOMINGO', 'LUNES', 'MARTES', 'MIERCOLES', 'JUEVES', 'VIERNES', 'SABADO'];
 
           function getWeekDay(date) {
@@ -87,6 +95,7 @@
           console.log('Tarea 2: '+getWeekDay(tarea2));
 
           // Tarea 4
+          console.warn('Restar dias a una fecha');
           function getDateAgo(date, restarDias) {
             let newDate = new Date(date);
             newDate.setDate(date.getDate() - restarDias);
@@ -98,10 +107,11 @@
           console.log('Tarea 4: '+getDateAgo(tarea4, 3));
 
           // Tarea 5
+          console.warn('Ultimo dia de un mes');
           function getLastDayOfMonth(year, month) {
             //Recuerda correccion de fechas
-            let fecha = new Date(year, month );
             // let fecha = new Date(year, month - 1, 0);
+            let fecha = new Date(year, month );
 
             fecha.setMonth(fecha.getMonth() + 1);
             fecha.setDate(fecha.getDate() - 1);
@@ -110,6 +120,33 @@
           }
 
           console.log('Tarea 5: '+getLastDayOfMonth(2012, 1));
+
+          // Dias de un mes
+          console.warn('Dias de un mes');
+          let calendario = new Date(2022, 3);
+
+          function genereteCalendar(date) {
+            // Estamos usando autocorreccion
+            // let nuevaFecha = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+            // console.log(nuevaFecha);
+            // for (let i = 1; i <= nuevaFecha.getDate(); i++ ) {
+            //   console.log('Dia: '+i);
+            // }
+
+            // while (date.getMonth()) {
+
+            // }
+          }
+
+          genereteCalendar(calendario);
+
+          // Creando un reloj
+          let reloj = document.querySelector('#reloj');
+          setInterval(() => {
+            let fechaReloj = new Date();
+            reloj.textContent = fechaReloj.getHours()+':'+fechaReloj.getMinutes()+':'+String(fechaReloj.getSeconds()).padStart(2, '0');
+          }, 1000);
+
    </script>
 </body>
 </html>
