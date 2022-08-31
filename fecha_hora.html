@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendario</title>
+    <style>
+        table {
+          border-collapse: collapse;
+        }
+    
+        td,
+        th {
+          border: 1px solid black;
+          padding: 3px;
+          text-align: center;
+        }
+    
+        th {
+          font-weight: bold;
+          background-color: #E6E6E6;
+        }
+
+      </style>
+</head>
+<body>
+    
+    <div id="calendario"></div>
+
+    <script>
+        // createCalendar('calendar', 2021, 8);
+          let date = new Date();
+          document.body.innerHTML = `<div>Fecha 1 (Sin parametros): ${date}</div>`;
+
+          let date1 = new Date(1000 * 60 * 24); // 1 seg = 1000 milisegundos
+          document.body.innerHTML += `<div>Fecha 2 (Milisegundos): ${date1}</div>`;
+
+          let date2 = new Date('2021-05-24');
+          document.body.innerHTML += `<div>Fecha 2 (Fecha String): ${date2}</div>`;
+          
+          //Las fechas se autocorrigen
+          let date3 = new Date(2022, 6, 5);
+          document.body.innerHTML += `<div>Fecha 2 (Fecha Parametros): ${date3}</div>`;
+          date3.setDate(date3.getDate() + 3);
+
+          console.log('Año: '+date.getFullYear());
+          console.log('Mes: '+date.getMonth());
+          console.log('Dia: '+date.getDate());
+          console.log('Horas: '+date.getHours());
+          console.log('Minutos: '+date.getMinutes());
+          console.log('Minutos: '+date.getSeconds());
+          console.log('N° Dia (0 - 6): '+date.getDay());
+          console.log('Tinestamp: '+date.getTime());
+          console.log('Fecha Sumada (+3 dias): '+date3);
+          console.log('Fecha Convertida Timestamp: '+(+date));
+
+          let start = new Date();
+
+          for (let i = 0; i < 100000; i++) {
+            let doSomething = i * i * i;
+          }
+
+          let end = new Date();
+
+          console.log(`Tiempo transcurrido es de ${end - start} ms`);
+
+          let primeraFecha = new Date(2022, 08, 25);
+          let segundaFecha = new Date(2022, 08, 23);
+
+          let resta = new Date(primeraFecha - segundaFecha);
+
+          console.log(resta.getDate());
+
+          // Tarea 1
+          let tarea1 = new Date(2012, 01, 20, 3, 12);
+          console.log('Tarea 1: '+tarea1);
+
+          // Tarea 2
+          let dias = ['DOMINGO', 'LUNES', 'MARTES', 'MIERCOLES', 'JUEVES', 'VIERNES', 'SABADO'];
+
+          function getWeekDay(date) {
+            return dias[date.getDay()];
+          }
+
+          let tarea2 = new Date(2022, 7, 31);
+          console.log('Tarea 2: '+getWeekDay(tarea2));
+
+          // Tarea 4
+          function getDateAgo(date, restarDias) {
+            let newDate = new Date(date);
+            newDate.setDate(date.getDate() - restarDias);
+            return newDate;
+          }
+
+          let tarea4 = new Date(2015, 0, 2);
+
+          console.log('Tarea 4: '+getDateAgo(tarea4, 3));
+
+          // Tarea 5
+          function getLastDayOfMonth(year, month) {
+            //Recuerda correccion de fechas
+            let fecha = new Date(year, month );
+            // let fecha = new Date(year, month - 1, 0);
+
+            fecha.setMonth(fecha.getMonth() + 1);
+            fecha.setDate(fecha.getDate() - 1);
+            
+            return fecha.getDate();
+          }
+
+          console.log('Tarea 5: '+getLastDayOfMonth(2012, 1));
+   </script>
+</body>
+</html>
